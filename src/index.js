@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ServicioApiCustomers from './component/ServicioApiCustomers';
+import ServiceApiSuppliers from './component/ServiceApiSuppliers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ServicioApiCustomers />
-  </React.StrictMode>
+  // <ServicioApiCustomers />
+  <ServiceApiSuppliers />
 );
 
 // If you want to start measuring performance in your app, pass a function
