@@ -8,7 +8,7 @@ import ServiceApiSuppliers from './component/ServiceApiSuppliers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <ServicioApiCustomers />
+  //<ServicioApiCustomers />
   <ServiceApiSuppliers />
 );
 

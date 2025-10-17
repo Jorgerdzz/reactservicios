@@ -1,10 +1,11 @@
 
 import axios from 'axios';
 import React, { Component } from 'react'
+import Global from '../Global';
 
 export default class ServiceApiSuppliers extends Component {
 
-    url = "https://services.odata.org/V4/Northwind/Northwind.svc/Suppliers";
+    url = Global.urlNorthwind;
 
     state = {
         proveedores: [],
@@ -14,7 +15,8 @@ export default class ServiceApiSuppliers extends Component {
     id = React.createRef();
 
     loadSupplier = () => {
-        axios.get(this.url).then(response => {
+        let request = "Suppliers";
+        axios.get(this.url + request).then(response => {
             let proveedores = response.data.value;
             this.setState({
                 proveedores: proveedores
