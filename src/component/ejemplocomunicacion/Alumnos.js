@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 
 export default class Alumnos extends Component {
 
+    state = {
+        alumnos: []
+    }
+
     infoAlumno = () => {
         this.props.searchAlumno(this.props.alumno);
     }

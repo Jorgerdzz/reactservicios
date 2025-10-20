@@ -10,6 +10,9 @@ import EmpleadosDepartamentov2 from './component/EmpleadosDepartamentov2';
 import EmpleadosOficios from './component/EmpleadosOficios';
 import Departamentos from './component/maestrodetalle/Departamentos';
 import Cursos from './component/ejemplocomunicacion/Cursos';
+import TablaMultiplicar from './component/TablaMultiplicar';
+import Router from './component/Router';
+import MenuRutas from './component/MenuRutas';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,7 +22,12 @@ root.render(
   //<EmpleadosDepartamentov2 />
   //<EmpleadosOficios />
   //<Departamentos />
-  <Cursos />
+  //<Cursos />
+  //<TablaMultiplicar numero="7" />
+  <div style={{margin: "auto", width: "50%"}}>
+    <MenuRutas />
+    <Router />
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function

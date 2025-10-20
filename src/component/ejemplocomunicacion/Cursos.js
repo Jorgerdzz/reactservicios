@@ -62,13 +62,16 @@ export default class Cursos extends Component {
             </div>     
         }
         
-        <select onChange={this.loadAlumnosCurso} ref={this.selectCursos}>
-            {
-                this.state.cursos.map((curso, index) => {
-                    return(<option key={index} value={curso}>{curso}</option>)
-                })
-            }
-        </select>
+        <form>
+            <select onChange={this.loadAlumnosCurso} ref={this.selectCursos}>
+                {
+                    this.state.cursos.map((curso, index) => {
+                        return(<option key={index} value={curso}>{curso}</option>)
+                    })
+                }
+            </select>
+        </form>
+        
         <ul>
             {
                 this.state.alumnos.map((alumno, index) => {
