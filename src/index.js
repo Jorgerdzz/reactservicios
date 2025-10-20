@@ -8,6 +8,7 @@ import ServiceApiSuppliers from './component/ServiceApiSuppliers';
 import EmpleadosDepartamento from './component/EmpleadosDepartamento';
 import EmpleadosDepartamentov2 from './component/EmpleadosDepartamentov2';
 import EmpleadosOficios from './component/EmpleadosOficios';
+import Departamentos from './component/maestrodetalle/Departamentos';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,7 +16,8 @@ root.render(
   //<ServiceApiSuppliers />
   //<EmpleadosDepartamento />
   //<EmpleadosDepartamentov2 />
-  <EmpleadosOficios />
+  //<EmpleadosOficios />
+  <Departamentos />
 );
 
 // If you want to start measuring performance in your app, pass a function

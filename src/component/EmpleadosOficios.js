@@ -80,7 +80,7 @@ export default class EmpleadosOficios extends Component {
                 {
                     this.state.empleadosOficios.map((empleado, index) => {
                         return(
-                            <tr>
+                            <tr key={index}>
                                 <td>{empleado.apellido}</td>
                                 <td>{empleado.oficio}</td>
                                 <td>{empleado.salario}</td>
