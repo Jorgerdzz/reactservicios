@@ -5,43 +5,38 @@ import Alumnos from './Alumnos';
 
 export default class Cursos extends Component {
 
-    urlCursos = Global.urlCursos;
-    urlAlumnos = Global.urlAlumnos;
+    urlEjemplos = Global.urlEjemplos;
 
     selectCursos = React.createRef();
 
     state = {
         cursos: [],
-        alumnos: [],
-        alumno: null
+        idCurso: 0,
+        alumnoSeleccionado: null
     }
 
     loadCursos = () => {
-        axios.get(this.urlCursos).then(response => {
+        let request = "api/Alumnos/Cursos";
+        axios.get(this.urlEjemplos + request).then(response => {
             this.setState({
                 cursos: response.data
             })
         })
     }
 
-    loadAlumnosCurso = (e) => {
+    mostrarAlumnos = (e) => {
         e.preventDefault();
-        let curso = this.selectCursos.current.value;
-        let request = "FiltrarCurso/" + curso;
-        axios.get(this.urlAlumnos + request).then(response => {
-            this.setState({
-                alumnos: response.data
-            })
+        let idCurso = this.selectCursos.current.value;
+        this.setState({
+            idCurso: idCurso
         })
     }
 
-    searchAlumno = (alumno) => {
-        let request = "FindAlumno/" + alumno.idAlumno;
-        axios.get(this.urlAlumnos + request).then(response => {
-            this.setState({
-                alumno: response.data
-            })
+    seleccionarAlumno = (alumno) => {
+        this.setState({
+            alumnoSeleccionado: alumno
         })
+        
         
     }
 
@@ -54,16 +49,16 @@ export default class Cursos extends Component {
       <div>
         <h1>SELECCIONE CURSO</h1>
         {
-            this.state.alumno != null &&
+            this.state.alumnoSeleccionado != null &&
             <div>
-                <h3>{this.state.alumno.nombre} {this.state.alumno.apellidos}</h3>
-                <h3>idAlumno: {this.state.alumno.idAlumno}</h3>
-                <img src={this.state.alumno.imagen} width='300px' height='250px'></img>
+                <h3>{this.state.alumnoSeleccionado.nombre} {this.state.alumnoSeleccionado.apellidos}</h3>
+                <h3>idAlumno: {this.state.alumnoSeleccionado.idAlumno}</h3>
+                <img src={this.state.alumnoSeleccionado.imagen} width='300px' height='250px'></img>
             </div>     
         }
         
         <form>
-            <select onChange={this.loadAlumnosCurso} ref={this.selectCursos}>
+            <select onChange={this.mostrarAlumnos} ref={this.selectCursos}>
                 {
                     this.state.cursos.map((curso, index) => {
                         return(<option key={index} value={curso}>{curso}</option>)
@@ -71,14 +66,10 @@ export default class Cursos extends Component {
                 }
             </select>
         </form>
-        
-        <ul>
             {
-                this.state.alumnos.map((alumno, index) => {
-                    return(<Alumnos key={alumno.idAlumno} alumno={alumno} searchAlumno={this.searchAlumno}/>)
-                })
+                this.state.idCurso != 0 &&
+                <Alumnos idcurso={this.state.idCurso} seleccionarAlumno={this.seleccionarAlumno}/>
             }
-        </ul>
       </div>
     )
   }

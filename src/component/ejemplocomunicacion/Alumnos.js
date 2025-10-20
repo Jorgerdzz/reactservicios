@@ -1,20 +1,49 @@
 import React, { Component } from 'react'
+import Global from '../../Global';
+import axios from 'axios';
 
 export default class Alumnos extends Component {
 
-    state = {
-        alumnos: []
-    }
+  urlEjemplos = Global.urlEjemplos
 
-    infoAlumno = () => {
-        this.props.searchAlumno(this.props.alumno);
+  state = {
+    alumnos: []
+  }
+
+  loadAlumnos = () => {
+    let request = "api/Alumnos/FiltrarCurso/" + this.props.idcurso
+    axios.get(this.urlEjemplos + request).then(response => {
+      this.setState({
+        alumnos: response.data
+      })
+    })
+  }
+
+  componentDidUpdate = (oldProps) => {
+    if(oldProps.idcurso != this.props.idcurso){
+      this.loadAlumnos();
     }
+  }
+
+  componentDidMount = () => {
+    this.loadAlumnos();
+  }
 
   render() {
     return (
       <div>
-        <li>{this.props.alumno.nombre} {this.props.alumno.apellidos}</li>
-        <button onClick={this.infoAlumno}>Detalles</button>
+        <ul>
+          {
+            this.state.alumnos.map((alumno, index) => {
+              return(<li key={index}>{alumno.nombre} {alumno.apellidos}
+              <button onClick={ () => {
+                this.props.seleccionarAlumno(alumno);
+              }}>
+                Detalles
+                </button></li>)
+            })
+          }
+        </ul>
       </div>
     )
   }

@@ -25,8 +25,9 @@ root.render(
   //<Cursos />
   //<TablaMultiplicar numero="7" />
   <div style={{margin: "auto", width: "50%"}}>
-    <MenuRutas />
-    <Router />
+    {/* <MenuRutas />
+    <Router /> */}
+    <Cursos />
   </div>
 );
 
