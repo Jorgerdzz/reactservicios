@@ -8,6 +8,7 @@ export default class HospitalesMultiples extends Component {
     url = Global.urlEjemplos;
 
     selectMultiple = React.createRef();
+    cajaincremento = React.createElement();
 
     state = {
         hospitales: [],
@@ -38,6 +39,19 @@ export default class HospitalesMultiples extends Component {
         })
     }
 
+    updateSalarios = () => {
+        let incremento = this.cajaincremento.current.value;
+        let cadena = "";
+        for(let id of this.state.hospitalesSeleccionados){
+            cadena += "&idhospital=" + id;
+        }
+        let cadenaIncremento = "?incremento=" + incremento
+        let request = "api/Trabajadores/UpdateSalarioTrabajadoresHospitales" + cadenaIncremento + cadena
+        axios.put(this.url + request).then(response => {
+            console.log("Modificado")
+        })
+    }
+
     componentDidMount = () => {
         this.loadHospitales();
     }
@@ -56,7 +70,10 @@ export default class HospitalesMultiples extends Component {
                             )
                         })
                     }
-                </select>
+                </select><br></br>
+                <label>Introduzca incremento:</label>
+                <input type='number' ref={this.cajaincremento} className='form-control'></input><br></br>
+                <button className='btn btn-primary' onClick={this.updateSalarios}>Incrementar salarios</button><br></br>
                 <button className='btn btn-primary' onClick={this.getHospitales}>Buscar trabajadores</button>
         </form>
         {

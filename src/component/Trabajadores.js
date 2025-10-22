@@ -29,6 +29,7 @@ export default class Trabajadores extends Component {
         })
     }
 
+
     componentDidMount = () => {
         this.loadTrabajadores();
     }
