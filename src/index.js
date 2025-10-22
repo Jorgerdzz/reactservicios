@@ -18,6 +18,7 @@ import Cursos from './component/ejemplocomunicacion/Cursos';
 import TablaMultiplicar from './component/TablaMultiplicar';
 import Router from './component/Router';
 import MenuRutas from './component/MenuRutas';
+import HospitalesMultiples from './component/HospitalesMultiples';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -30,8 +31,7 @@ root.render(
   //<Cursos />
   //<TablaMultiplicar numero="7" />
   <div style={{margin: "auto", width: "50%"}}>
-    <Router />
-    {/* <Cursos /> */}
+    <HospitalesMultiples />
   </div>
 );
 
