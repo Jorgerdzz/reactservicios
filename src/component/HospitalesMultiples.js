@@ -8,11 +8,11 @@ export default class HospitalesMultiples extends Component {
     url = Global.urlEjemplos;
 
     selectMultiple = React.createRef();
-    cajaincremento = React.createElement();
+    cajaincremento = React.createRef();
 
     state = {
         hospitales: [],
-        hospitalesSeleccionados: []
+        hospitalesSeleccionados: [],
     }
 
     loadHospitales = () => {
@@ -24,8 +24,7 @@ export default class HospitalesMultiples extends Component {
         })
     }
 
-    getHospitales = (e) => {
-        e.preventDefault();
+    getSeleccion = () => {
         let options = this.selectMultiple.current.options;
         let aux = [];
         for(let option of options){
@@ -34,23 +33,36 @@ export default class HospitalesMultiples extends Component {
                 aux.push(option.value);
             }
         }
+        return aux;
+    }
+
+    getHospitales = (e) => {
+        e.preventDefault();
         this.setState({
-            hospitalesSeleccionados: aux
+            hospitalesSeleccionados: this.getSeleccion()
         })
     }
 
-    updateSalarios = () => {
+    updateSalarios = (e) => {
+        e.preventDefault();
+        let idhospitales = this.getSeleccion();
         let incremento = this.cajaincremento.current.value;
         let cadena = "";
-        for(let id of this.state.hospitalesSeleccionados){
+        for(let id of idhospitales){
             cadena += "&idhospital=" + id;
         }
-        let cadenaIncremento = "?incremento=" + incremento
-        let request = "api/Trabajadores/UpdateSalarioTrabajadoresHospitales" + cadenaIncremento + cadena
-        axios.put(this.url + request).then(response => {
-            console.log("Modificado")
+        console.log(cadena)
+        let request = "api/Trabajadores/UpdateSalarioTrabajadoresHospitales?incremento=" + incremento + cadena
+        console.log(request);
+        axios.put(this.url + request).then(response=>{
+            console.log("Actualizado")
+            this.setState({
+                hospitalesSeleccionados: idhospitales
+            })
         })
     }
+
+
 
     componentDidMount = () => {
         this.loadHospitales();
@@ -73,7 +85,7 @@ export default class HospitalesMultiples extends Component {
                 </select><br></br>
                 <label>Introduzca incremento:</label>
                 <input type='number' ref={this.cajaincremento} className='form-control'></input><br></br>
-                <button className='btn btn-primary' onClick={this.updateSalarios}>Incrementar salarios</button><br></br>
+                <button onClick={this.updateSalarios} className='btn btn-primary'>Incrementar salario</button>
                 <button className='btn btn-primary' onClick={this.getHospitales}>Buscar trabajadores</button>
         </form>
         {
